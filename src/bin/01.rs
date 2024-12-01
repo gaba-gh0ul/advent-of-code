@@ -1,5 +1,5 @@
 advent_of_code::solution!(1);
-use std::collections::{hash_map, HashMap};
+use std::collections::HashMap;
 
 /// Create a vector to store left and right values, iterate over the lines pushing each value
 /// sort each vector with sort_unstable
