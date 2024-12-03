@@ -3,19 +3,16 @@ use regex::Regex;
 advent_of_code::solution!(3);
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let re_1 = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
-    let re_2 = Regex::new(r"[0-9]+").unwrap();
+    let re = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
+
     Some(
         input
             .lines()
             .map(|l| -> u32 {
-                re_1.find_iter(l)
-                    .map(|m| m.as_str())
-                    .collect::<Vec<_>>()
-                    .into_iter()
-                    .map(|r| {
-                        re_2.find_iter(r)
-                            .fold(1, |acc, v| acc * v.as_str().parse::<u32>().unwrap())
+                re.captures_iter(l)
+                    .map(|c| {
+                        let (_, [first, second]) = c.extract();
+                        first.parse::<u32>().unwrap() * second.parse::<u32>().unwrap()
                     })
                     .sum()
             })
