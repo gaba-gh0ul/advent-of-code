@@ -21,17 +21,17 @@ pub fn part_one(input: &str) -> Option<u32> {
 /// iterator over them, match to the string and value of pass
 /// if the value is "do", set pass to true, if "don't", set pass to false
 pub fn part_two(input: &str) -> Option<u32> {
-    let re = Regex::new(r"mul\(\d+,\d+\)|don\'t|do").unwrap();
+    let re = Regex::new(r"mul\(\d+,\d+\)|don\'t\(\)|do\(\)").unwrap();
     let cg = Regex::new(r"\((\d+),(\d+)\)").unwrap();
     let mut pass = false;
 
     Some(input.lines().fold(0, |acc, l| {
         acc + re.find_iter(l).fold(0, |a, h| match (pass, h.as_str()) {
-            (_, "do") => {
+            (_, "do()") => {
                 pass = false;
                 a
             }
-            (_, "don't") => {
+            (_, "don't()") => {
                 pass = true;
                 a
             }
