@@ -48,11 +48,10 @@ pub fn part_two(input: &str) -> Option<u32> {
                     .map(|n| n.parse::<u32>().unwrap())
                     .collect();
 
-                let nums_len = nums.len();
-                let mut variants: Vec<Vec<u32>> = Vec::with_capacity(nums_len);
+                let mut variants: Vec<Vec<u32>> = Vec::with_capacity(nums.len());
                 variants.push(nums.clone());
 
-                for idx in 0..nums_len {
+                for idx in 0..nums.len() {
                     variants.push(nums.clone());
                     variants[idx + 1].remove(idx);
                 }
